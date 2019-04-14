@@ -15,7 +15,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   //title = 'Mai Tấn Sang I love U';
-  public title="TEDU"
+  public title="TEDU hello"
   //property binding
   public image ="http://lorempixel.com/300/300";
   public welcomeText="Welcome to Angular 2"

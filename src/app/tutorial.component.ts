@@ -1,34 +1,26 @@
-import {Component} from '@angular/core';
+import {Component, Input,Output,EventEmitter} from '@angular/core';
 import { preserveWhitespacesDefault } from '@angular/compiler';
 
 @Component({
     selector: 'my-tutorial',
     template:`
-    <h2>{{title}}</h2>
-    <p [ngClass]="{classOne:cone,classTwo:ctwo}">This ngClass apply style</p>
-    <button (click)="taggle()">taggle</button>
-    <p [ngStyle]="{'font-style':style,'font-size':size}">This paragraph will be apply to ngStyle</p>
-    `,
-
-    styles:[
-        `
-        .classOne{
-            color: white;
-        }
-        .classTwo{
-            background-color:black;
-        }
-        `
-    ]
+    <p>Get name from appComponent: {{name}}</p>
+    <button [disabled]= "voted" (click) = "vote(true)">Agree</button>
+    <button [disabled]= "voted" (click) = "vote(false)">Disgree</button>
+    Result:{{voted}}
+    `
 })
 export class TutorialComponent{
-    public cone = true;
-    public ctwo=true;
-    public style="italic";
-    public size="30px";
-  taggle(){
-     this.cone = !this.cone;
-     this.ctwo = !this.ctwo;
-  }
+    @Input() name:string;
+    @Output() onVote = new EventEmitter<boolean>();
+    public voted: boolean= false;
+    
+    setName(name: string){
+        this.name = name;
+    } 
 
+    vote(agree: boolean ){
+        this.voted= true;
+        this.onVote.emit(agree);
+    }
 }
